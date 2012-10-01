@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../lib/dancemania_album', __FILE__)
+
+help_text = <<HERE
+See https://github.com/jaredbranum/dancemania-tagger/blob/master/README.md
+HERE
+
+# "--help"
+puts help_text and exit(0) if ARGV.index("--help")
+# "--artist-name"
+idx = ARGV.index("--artist-name")
+2.times{ @artist_name = ARGV.delete_at(idx) } if idx
+# "--album_title"
+idx = ARGV.index("--album_title")
+2.times{ @album_title = ARGV.delete_at(idx) } if idx
+# "--preview"
+@preview = ARGV.delete("--preview")
+# "--tag_only"
+@tag_only = ARGV.delete("--tag-only")
+# "--rename_only"
+@rename_only = ARGV.delete("--rename-only")
+
+if ARGV.empty?
+  puts "Missing album title/url. See dancemania-tagger --help"
+  exit(1)
+end
+
+opts = {
+  :artist_name => @artist_name,
+  :album_title => @album_title
+}
+album = DancemaniaAlbum.new(ARGV.first, opts)
+code = if @preview
+  album.preview
+elsif @tag_only
+  album.tag
+elsif @rename_only
+  album.rename
+else
+  album.tag_and_rename
+end
+
+exit(code)
