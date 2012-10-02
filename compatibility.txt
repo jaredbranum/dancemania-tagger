@@ -1,6 +1,6 @@
 * Main Series
-[ ] Dancemania 1
-[ ] Dancemania 2
+[X] Dancemania 1
+[X] Dancemania 2
 [ ] Dancemania 3
 [ ] Dancemania 4
 [ ] Dancemania 5
