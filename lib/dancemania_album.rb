@@ -12,21 +12,24 @@ class DancemaniaAlbum
   )
 
   def initialize(album, opts={})
-    @url = if /(?:\w+:\/\/)|^www\./i.match(album)
-      album
-    else
-      normalize_href(@@ALBUMS.inject({}){|h,(k,v)| h[k.downcase] = v; h }[album.downcase])
+    begin
+      @url = if /(?:\w+:\/\/)|^www\./i.match(album)
+        album
+      else
+        fix_href(@@ALBUMS.inject({}){|h,(k,v)| h[k.downcase] = v; h }[album.downcase])
+      end
+    rescue
     end
     raise DancemaniaAlbum::AlbumNotFound if @url.nil? || @url.empty?
     @tracks = {}
     doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(@url).read).to_html) # ridiculous
     @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first
       .text.gsub(/\u300e|\u300f|\u3000|\r|\n/, ' ').split(' ').join(' ')
-    @art = open(normalize_href doc.css('#disc img').first.attributes['src'].value)
+    @art = open(fix_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
-      info = /(\d+)\.\s*(.*)(?:\/|\uff0f)(.*)?/.match(
-        tl.text.gsub(/\u3000|\r|\n/, ' ').strip)
+      info = /(\d+)\.\s*([^\/|\uff0f]*)(?:\/|\uff0f)(.*)?/.match(
+        tl.text.gsub(/\u3000|\r|\n/, ' ').strip.split(' ').join(' '))
       if info
         track, artist, title = info[1..-1].map{|x| x.strip }
         @tracks[track.to_i] = { :artist => artist, :title => title }
@@ -112,7 +115,7 @@ class DancemaniaAlbum
     new_name.gsub(bad_chars,'').split(' ').join(' ')
   end
 
-  def normalize_href(href)
+  def fix_href(href)
     href[0].chr == '/' ? "http://www.emimusic.jp#{href}" : DANCEMANIA_URL + href
   end
 

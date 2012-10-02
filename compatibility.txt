@@ -19,9 +19,9 @@
 [X] Dancemania X8
 [X] Dancemania X9
 [X] Dancemania 20
-[ ] Dancemania 21
-[ ] Dancemania 22
-[ ] Dancemania EX 1
+[X] Dancemania 21
+[X] Dancemania 22
+[X] Dancemania EX 1
 [ ] Dancemania EX 2
 [ ] Dancemania EX 3
 [ ] Dancemania EX 4
