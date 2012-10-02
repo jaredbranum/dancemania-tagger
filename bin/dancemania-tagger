@@ -12,7 +12,7 @@ puts help_text and exit(0) if ARGV.index("--help")
 idx = ARGV.index("--artist-name")
 2.times{ @artist_name = ARGV.delete_at(idx) } if idx
 # "--album_title"
-idx = ARGV.index("--album_title")
+idx = ARGV.index("--album-title")
 2.times{ @album_title = ARGV.delete_at(idx) } if idx
 # "--preview"
 @preview = ARGV.delete("--preview")
