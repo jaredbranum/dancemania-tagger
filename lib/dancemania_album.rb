@@ -21,7 +21,7 @@ class DancemaniaAlbum
     @tracks = {}
     doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(url).read).to_html) # ridiculous
     @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first
-      .text.gsub(/\u300e|\u300f/, '').split(/\s|\u3000/).join(' ')
+      .text.gsub(/\u300e|\u300f|\u3000/, ' ').split(' ').join(' ')
     @art = open(normalize_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
