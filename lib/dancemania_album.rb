@@ -6,7 +6,7 @@ class DancemaniaAlbum
   DANCEMANIA_URL = 'http://www.emimusic.jp/dancemania/dancemania/'
   @@ALBUMS ||= (
     doc = Nokogiri::HTML(open(DANCEMANIA_URL))
-    titles = doc.css('p.cdttl').map{|a| a.children.text.split(' ').join(' ') }
+    titles = doc.css('p.cdttl').map{|a| a.children.text.split(/\s|\u3000/).join(' ') }
     links = doc.css('p.cdttl + a').map{|a| a.attributes['href'].value }
     Hash[*titles.zip(links).flatten]
   )
@@ -21,7 +21,7 @@ class DancemaniaAlbum
     @tracks = {}
     doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(url).read).to_html) # ridiculous
     @album_title = opts[:album_title] || doc.css('p.cd_ttl').first.text.
-      gsub(/\u300e|\u300f/, '').split(' ').join(' ')
+      gsub(/\u300e|\u300f/, '').split(/\s|\u3000/).join(' ')
     @art = open(normalize_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
