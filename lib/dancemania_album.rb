@@ -37,15 +37,16 @@ class DancemaniaAlbum
 
   def preview
     n = 0
+    puts "album title: #{@album_title}"
+    puts "album artist: #{@album_artist}"
     Dir.glob("*.[mM][pP]3") do |song|
       tracknum = (n += 1)
+      puts "----------"
       puts "filename: #{song}"
       puts "track number: #{tracknum}"
       puts "track title: #{@tracks[tracknum][:title]}"
       puts "track artist: #{@tracks[tracknum][:artist]}"
-      puts "album artist: #{@album_artist}"
       puts "new filename: #{generate_filename(song, tracknum)}"
-      puts "----------"
     end
     true
   end
