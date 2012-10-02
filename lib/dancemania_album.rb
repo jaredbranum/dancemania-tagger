@@ -11,7 +11,7 @@ class DancemaniaAlbum
     Hash[*titles.zip(links).flatten]
   )
 
-  def initialize(album, opts)
+  def initialize(album, opts={})
     url = if /(?:\w+:\/\/)|^www\./i.match(album)
       album
     else
@@ -21,11 +21,12 @@ class DancemaniaAlbum
     @tracks = {}
     doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(url).read).to_html) # ridiculous
     @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first
-      .text.gsub(/\u300e|\u300f|\u3000/, ' ').split(' ').join(' ')
+      .text.gsub(/\u300e|\u300f|\u3000|\r|\n/, ' ').split(' ').join(' ')
     @art = open(normalize_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
-      info = /(\d+)\.\s*(.*)(?:\/|\uff0f)(.*)?/.match(tl.text.strip)
+      info = /(\d+)\.\s*(.*)(?:\/|\uff0f)(.*)?/.match(
+        tl.text.gsub(/\u3000|\r|\n/, ' ').strip)
       if info
         track, artist, title = info[1..-1].map{|x| x.strip }
         if /\uff0f/.match(tl.text.strip) # this is crazy

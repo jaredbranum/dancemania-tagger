@@ -13,7 +13,7 @@
 [X] Dancemania X2
 [X] Dancemania X3
 [X] Dancemania X4
-[ ] Dancemania X5
+[X] Dancemania X5
 [ ] Dancemania X6
 [ ] Dancemania X7
 [ ] Dancemania X8
