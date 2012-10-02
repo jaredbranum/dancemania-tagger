@@ -2,17 +2,17 @@
 [X] Dancemania 1
 [X] Dancemania 2
 [X] Dancemania 3
-[ ] Dancemania 4
-[ ] Dancemania 5
-[ ] Dancemania 6
-[ ] Dancemania 7
-[ ] Dancemania 8
-[ ] Dancemania 9
-[ ] Dancemania 10
-[ ] Dancemania X1
-[ ] Dancemania X2
-[ ] Dancemania X3
-[ ] Dancemania X4
+[X] Dancemania 4
+[X] Dancemania 5
+[X] Dancemania 6
+[X] Dancemania 7
+[X] Dancemania 8
+[X] Dancemania 9
+[X] Dancemania 10
+[X] Dancemania X1
+[X] Dancemania X2
+[X] Dancemania X3
+[X] Dancemania X4
 [ ] Dancemania X5
 [ ] Dancemania X6
 [ ] Dancemania X7
