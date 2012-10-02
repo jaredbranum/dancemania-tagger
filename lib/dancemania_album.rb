@@ -12,14 +12,14 @@ class DancemaniaAlbum
   )
 
   def initialize(album, opts={})
-    url = if /(?:\w+:\/\/)|^www\./i.match(album)
+    @url = if /(?:\w+:\/\/)|^www\./i.match(album)
       album
     else
       normalize_href(@@ALBUMS.inject({}){|h,(k,v)| h[k.downcase] = v; h }[album.downcase])
     end
-    raise DancemaniaAlbum::AlbumNotFound if url.nil? || url.empty?
+    raise DancemaniaAlbum::AlbumNotFound if @url.nil? || @url.empty?
     @tracks = {}
-    doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(url).read).to_html) # ridiculous
+    doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(@url).read).to_html) # ridiculous
     @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first
       .text.gsub(/\u300e|\u300f|\u3000|\r|\n/, ' ').split(' ').join(' ')
     @art = open(normalize_href doc.css('#disc img').first.attributes['src'].value)
@@ -29,10 +29,6 @@ class DancemaniaAlbum
         tl.text.gsub(/\u3000|\r|\n/, ' ').strip)
       if info
         track, artist, title = info[1..-1].map{|x| x.strip }
-        if /\uff0f/.match(tl.text.strip) # this is crazy
-          title = artist
-          artist = @album_artist
-        end
         @tracks[track.to_i] = { :artist => artist, :title => title }
       end
     end
@@ -121,5 +117,11 @@ class DancemaniaAlbum
 
   def fix_insane_special_cases
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best
+    # E-Rotic Megamix, Best of E-Rotic, and Captain's Best
+    if /(tocp64084)|(tocp64137)|(tocp64126)/.match(@url)
+      tracks.each do |k,v|
+        tracks[k] = { :title => v[:artist], :artist => @album_artist }
+      end
+    end
   end
 end
