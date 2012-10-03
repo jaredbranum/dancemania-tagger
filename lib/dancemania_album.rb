@@ -120,11 +120,14 @@ class DancemaniaAlbum
   end
 
   def fix_insane_special_cases
+    if /tocp64200/.match(@url) # Dancemania EX 2
+      @tracks[5] = { :artist => 'LADYBIRD', :title => 'DANGEROUS TO ME' }
+    end
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best
     # E-Rotic Megamix, Best of E-Rotic, and Captain's Best
     if /(tocp64084)|(tocp64137)|(tocp64126)/.match(@url)
-      tracks.each do |k,v|
-        tracks[k] = { :title => v[:artist], :artist => @album_artist }
+      @tracks.each do |k,v|
+        @tracks[k] = { :title => v[:artist], :artist => @album_artist }
       end
     end
   end
