@@ -120,6 +120,14 @@ class DancemaniaAlbum
   end
 
   def fix_insane_special_cases
+    if /tocp4002/.match(@url) # Dancemania 1
+      @album_title = "Dancemania 1"
+    end
+
+    if /(tocp64250)|(tocp64262)|(tocp64266)/.match(@url) # Dancemania EX 7, EX 8, EX 9
+      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
+    end
+
     if /tocp64200/.match(@url) # Dancemania EX 2
       @tracks[5] = { :artist => 'LADYBIRD', :title => 'DANGEROUS TO ME' }
     end
@@ -140,6 +148,15 @@ class DancemaniaAlbum
       @tracks[16] = { :artist => 'LOUD FORCE', :title => 'ROCK\'N ROLL' }
       @tracks[17] = { :artist => 'NEXT AGE', :title => 'PARADISE' }
       @tracks[18] = { :artist => 'C-LOUD', :title => 'FUNKY TOWN' }
+    end
+
+    if /tocp64262/.match(@url) # Dancemania EX 8
+      @tracks[18][:title] = 'ROCK FOR LIFE'
+    end
+
+    if /tocp64266/.match(@url) # Dancemania EX 9
+      @tracks[9] = { :artist => @tracks[9][:title], :title => @tracks[9][:artist] }
+      @tracks[12][:artist] = 'THE SHAPESHIFTERS'
     end
 
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best
