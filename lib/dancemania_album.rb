@@ -123,6 +123,25 @@ class DancemaniaAlbum
     if /tocp64200/.match(@url) # Dancemania EX 2
       @tracks[5] = { :artist => 'LADYBIRD', :title => 'DANGEROUS TO ME' }
     end
+
+    if /tocp64229/.match(@url) # Dancemania EX 5
+      @album_title = "Dancemania EX 5"
+      @tracks[5]  = { :artist => 'CAPTAIN JACK', :title => 'EARLY IN THE MORNING (we like the captain)' }
+      @tracks[6]  = { :artist => 'SCATMAN JOHN', :title => 'SCATMAN 2003' }
+      @tracks[7]  = { :artist => 'FRIDAY NIGHT POSSE', :title => 'KISS THIS (Voodoo & Serano Remix)' }
+      @tracks[8]  = { :artist => 'AQUAGEN', :title => 'HARD TO SAY I\'M SORRY' }
+      @tracks[9]  = { :artist => 'BTH', :title => 'DOMINGO DANCING' }
+      @tracks[10] = { :artist => 'X-TREME', :title => 'TAKE THE RECORD, DADDY!' }
+      @tracks[11] = { :artist => 'DJ ROMA feat. MC YOUNG MAN', :title => 'MC YOUNG MAN' }
+      @tracks[12] = { :artist => 'AMEN UK', :title => 'PASSION (Paul Masterson Club Mix)' }
+      @tracks[13] = { :artist => 'LA LUNA', :title => 'FALLIN\' (Radio Edit)' }
+      @tracks[14] = { :artist => 'KATE RYAN', :title => 'SCREAM FOR MORE (Radio Edit)' }
+      @tracks[15] = { :artist => 'ULTRABEAT', :title => 'PRETTY GREEN EYES (CJ Stone Remix)' }
+      @tracks[16] = { :artist => 'LOUD FORCE', :title => 'ROCK\'N ROLL' }
+      @tracks[17] = { :artist => 'NEXT AGE', :title => 'PARADISE' }
+      @tracks[18] = { :artist => 'C-LOUD', :title => 'FUNKY TOWN' }
+    end
+
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best
     # E-Rotic Megamix, Best of E-Rotic, and Captain's Best
     if /(tocp64084)|(tocp64137)|(tocp64126)/.match(@url)
