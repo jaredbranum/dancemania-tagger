@@ -25,10 +25,9 @@ Run `dancemania-tagger` from a directory containg a Dancemania album. By default
 
     dancemania-tagger [album] [--album-title title] [--artist-name artist] [--help] [--preview] [--rename-only] [--tag-only]
 
-`album`: The name of the album (e.g. "Dancemania SPEED G") or URL for that album (e.g. <http://www.emimusic.jp/dancemania/dancemania/disco/tocp64222.htm>).
+`album`: The name of the album (e.g. "Dancemania SPEED G") or URL for that album (e.g. <http://www.emimusic.jp/dancemania/dancemania/disco/tocp64222.htm>). This argument is required.
 
 `--album-title title`: The name of the album (used to override the value from the album page).
-
 
 `--artist-name artist`: The album artist name (defaults to "Dancemania").
 
