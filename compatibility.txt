@@ -31,27 +31,22 @@
 [X] Dancemania EX 8
 [X] Dancemania EX 9
 [ ] ダンスマニア・トレジャー ～10th・アニバーサリー・スペシャル・エディション～
-[ ] Dancemania BEST RED
-[ ] Dancemania BEST YELLOW
+[X] Dancemania BEST RED
+[X] Dancemania BEST YELLOW
 [ ] Dancemania Sparkle - Best Of 90's dance-pop ~
 [ ] Dancemania Sparkle CLASSICS
 [ ] Dancemania Party BEST OF 90's DANCE HITS
 
 * Summers & Winters
-[ ] Dancemania SUMMERS
-[ ] Dancemania SUMMERS 2
-[ ] Dancemania SUMMERS 3
-[ ] Dancemania SUMMERS 2001
+[X] Dancemania SUMMERS
+[X] Dancemania SUMMERS 2
+[X] Dancemania SUMMERS 3
+[X] Dancemania SUMMERS 2001
 [ ] Dancemania WINTERS ROCK GROOVE
 [ ] Dancemania WINTERS
 [ ] Dancemania WINTERS 2
 
 * Speed
-[ ] Dancemania SPEED G
-[ ] Dancemania SPEED G2
-[ ] Dancemania SPEED G3
-[ ] Dancemania SPEED G4
-[ ] Dancemania SPEED G5
 [ ] Dancemania SPEED
 [ ] Dancemania SPEED 2
 [ ] Dancemania SPEED 3
@@ -62,6 +57,11 @@
 [ ] Dancemania SPEED 8
 [ ] Dancemania SPEED 9
 [ ] Dancemania SPEED 10
+[ ] Dancemania SPEED G
+[ ] Dancemania SPEED G2
+[ ] Dancemania SPEED G3
+[ ] Dancemania SPEED G4
+[ ] Dancemania SPEED G5
 [ ] Christmas SPEED
 [ ] classical SPEED
 [ ] classical SPEED 2

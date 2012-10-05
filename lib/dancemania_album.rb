@@ -28,10 +28,10 @@ class DancemaniaAlbum
     @art = open(fix_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
-      info = /(\d+)\.\s*([^\/|\uff0f]*)(?:\/|\uff0f)(.*)?/.match(
+      info = /(\d+)\.\s*([^\/|\uff0f]*)(?:(?:\/|\uff0f)(.*))?/.match(
         tl.text.gsub(/\u3000|\r|\n/, ' ').strip.split(' ').join(' '))
       if info
-        track, artist, title = info[1..-1].map{|x| x.strip }
+        track, artist, title = info[1..-1].map{|x| x.strip unless x.nil? }
         @tracks[track.to_i] = { :artist => artist, :title => title }
       end
     end
@@ -157,6 +157,15 @@ class DancemaniaAlbum
     if /tocp64266/.match(@url) # Dancemania EX 9
       @tracks[9] = { :artist => @tracks[9][:title], :title => @tracks[9][:artist] }
       @tracks[12][:artist] = 'THE SHAPESHIFTERS'
+    end
+
+    if /tocp64071/.match(@url) # Dancemania SUMMERS 3
+      @album_title = "Dancemania SUMMERS 3"
+    end
+
+    if /tocp64122/.match(@url) # Dancemania SUMMERS 2001
+      @tracks[16][:title] = "BRASIL OVER ZURICH"
+      @tracks[17][:title] = "SWEETEST DAY OF MAY (Club Gospel Mix)"
     end
 
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best
