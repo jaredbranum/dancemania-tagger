@@ -111,8 +111,8 @@ class DancemaniaAlbum
     artist, title = [@tracks[num][:artist], @tracks[num][:title]]
     n = num < 10 ? "0#{num.to_s}" : num.to_s
     new_name = "#{n} - #{artist} - #{title}.mp3"
-    bad_chars = /<|>|:|"|\/|\\|\||\?|\*/
-    new_name.gsub(bad_chars,'').split(' ').join(' ')
+    bad_chars = /<|>|:|"|\/|\\|\||\?/
+    new_name.gsub('*','-').gsub(bad_chars,'').split(' ').join(' ')
   end
 
   def fix_href(href)

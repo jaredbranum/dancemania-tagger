@@ -42,14 +42,14 @@
 [X] Dancemania SUMMERS 2
 [X] Dancemania SUMMERS 3
 [X] Dancemania SUMMERS 2001
-[ ] Dancemania WINTERS ROCK GROOVE
-[ ] Dancemania WINTERS
-[ ] Dancemania WINTERS 2
+[X] Dancemania WINTERS
+[X] Dancemania WINTERS 2
+[X] Dancemania WINTERS ROCK GROOVE
 
 * Speed
-[ ] Dancemania SPEED
-[ ] Dancemania SPEED 2
-[ ] Dancemania SPEED 3
+[X] Dancemania SPEED
+[X] Dancemania SPEED 2
+[X] Dancemania SPEED 3
 [ ] Dancemania SPEED 4
 [ ] Dancemania SPEED 5
 [ ] Dancemania SPEED 6
