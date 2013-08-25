@@ -6,7 +6,7 @@ class DancemaniaAlbum
   DANCEMANIA_URL = 'http://www.emimusic.jp/dancemania/dancemania/'
   @@ALBUMS ||= (
     doc = Nokogiri::HTML(open(DANCEMANIA_URL))
-    titles = doc.css('p.cdttl').map{|a| a.children.text.split(/\s|\u3000/).join(' ') }
+    titles = doc.css('p.cdttl').map{|a| a.children.text.split(/(?:\s|\u3000)+/).join(' ') }
     links = doc.css('p.cdttl + a').map{|a| a.attributes['href'].value }
     Hash[*titles.zip(links).flatten]
   )
@@ -16,7 +16,7 @@ class DancemaniaAlbum
       @url = if /(?:\w+:\/\/)|^www\./i.match(album)
         album
       else
-        fix_href(@@ALBUMS.inject({}){|h,(k,v)| h[k.downcase] = v; h }[album.downcase])
+        fix_href(Hash[@@ALBUMS.map{|k,v| [k.downcase, v]}][album.downcase])
       end
     rescue
     end
@@ -124,39 +124,39 @@ class DancemaniaAlbum
       @album_title = "Dancemania 1"
     end
 
-    if /(tocp64250)|(tocp64262)|(tocp64266)/.match(@url) # Dancemania EX 7, EX 8, EX 9
-      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
-    end
-
     if /tocp64200/.match(@url) # Dancemania EX 2
-      @tracks[5] = { :artist => 'LADYBIRD', :title => 'DANGEROUS TO ME' }
+      @tracks[5] = { :artist => "LADYBIRD", :title => "DANGEROUS TO ME" }
     end
 
     if /tocp64229/.match(@url) # Dancemania EX 5
       @album_title = "Dancemania EX 5"
-      @tracks[5]  = { :artist => 'CAPTAIN JACK', :title => 'EARLY IN THE MORNING (we like the captain)' }
-      @tracks[6]  = { :artist => 'SCATMAN JOHN', :title => 'SCATMAN 2003' }
-      @tracks[7]  = { :artist => 'FRIDAY NIGHT POSSE', :title => 'KISS THIS (Voodoo & Serano Remix)' }
-      @tracks[8]  = { :artist => 'AQUAGEN', :title => 'HARD TO SAY I\'M SORRY' }
-      @tracks[9]  = { :artist => 'BTH', :title => 'DOMINGO DANCING' }
-      @tracks[10] = { :artist => 'X-TREME', :title => 'TAKE THE RECORD, DADDY!' }
-      @tracks[11] = { :artist => 'DJ ROMA feat. MC YOUNG MAN', :title => 'MC YOUNG MAN' }
-      @tracks[12] = { :artist => 'AMEN UK', :title => 'PASSION (Paul Masterson Club Mix)' }
-      @tracks[13] = { :artist => 'LA LUNA', :title => 'FALLIN\' (Radio Edit)' }
-      @tracks[14] = { :artist => 'KATE RYAN', :title => 'SCREAM FOR MORE (Radio Edit)' }
-      @tracks[15] = { :artist => 'ULTRABEAT', :title => 'PRETTY GREEN EYES (CJ Stone Remix)' }
-      @tracks[16] = { :artist => 'LOUD FORCE', :title => 'ROCK\'N ROLL' }
-      @tracks[17] = { :artist => 'NEXT AGE', :title => 'PARADISE' }
-      @tracks[18] = { :artist => 'C-LOUD', :title => 'FUNKY TOWN' }
+      @tracks[5]  = { :artist => "CAPTAIN JACK", :title => "EARLY IN THE MORNING (we like the captain)" }
+      @tracks[6]  = { :artist => "SCATMAN JOHN", :title => "SCATMAN 2003" }
+      @tracks[7]  = { :artist => "FRIDAY NIGHT POSSE", :title => "KISS THIS (Voodoo & Serano Remix)" }
+      @tracks[8]  = { :artist => "AQUAGEN", :title => "HARD TO SAY I'M SORRY" }
+      @tracks[9]  = { :artist => "BTH", :title => "DOMINGO DANCING" }
+      @tracks[10] = { :artist => "X-TREME", :title => "TAKE THE RECORD, DADDY!" }
+      @tracks[11] = { :artist => "DJ ROMA feat. MC YOUNG MAN", :title => "MC YOUNG MAN" }
+      @tracks[12] = { :artist => "AMEN UK", :title => "PASSION (Paul Masterson Club Mix)" }
+      @tracks[13] = { :artist => "LA LUNA", :title => "FALLIN' (Radio Edit)" }
+      @tracks[14] = { :artist => "KATE RYAN", :title => "SCREAM FOR MORE (Radio Edit)" }
+      @tracks[15] = { :artist => "ULTRABEAT", :title => "PRETTY GREEN EYES (CJ Stone Remix)" }
+      @tracks[16] = { :artist => "LOUD FORCE", :title => "ROCK'N ROLL" }
+      @tracks[17] = { :artist => "NEXT AGE", :title => "PARADISE" }
+      @tracks[18] = { :artist => "C-LOUD", :title => "FUNKY TOWN" }
+    end
+
+    if /(tocp64250)|(tocp64262)|(tocp64266)/.match(@url) # Dancemania EX 7, EX 8, EX 9
+      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
     end
 
     if /tocp64262/.match(@url) # Dancemania EX 8
-      @tracks[18][:title] = 'ROCK FOR LIFE'
+      @tracks[18][:title] = "ROCK FOR LIFE"
     end
 
     if /tocp64266/.match(@url) # Dancemania EX 9
       @tracks[9] = { :artist => @tracks[9][:title], :title => @tracks[9][:artist] }
-      @tracks[12][:artist] = 'THE SHAPESHIFTERS'
+      @tracks[12][:artist] = "THE SHAPESHIFTERS"
     end
 
     if /tocp64071/.match(@url) # Dancemania SUMMERS 3
@@ -166,6 +166,41 @@ class DancemaniaAlbum
     if /tocp64122/.match(@url) # Dancemania SUMMERS 2001
       @tracks[16][:title] = "BRASIL OVER ZURICH"
       @tracks[17][:title] = "SWEETEST DAY OF MAY (Club Gospel Mix)"
+    end
+
+    if /tocp64222/.match(@url) # Dancemania SPEED G
+      @tracks[3][:title] = "MR. DABADA (Skyrock Speed Mix)"
+      @tracks[22][:title] = "LET THE BEAT CONTROL YOUR BODY (B4 ZA BEAT SPEED MIX)"
+    end
+
+    if /tocp64232/.match(@url) # Dancemania SPEED G2
+      @album_title = "Dancemania SPEED G2"
+      @tracks[22][:title] = "DON'T EVEN TRY IT"
+    end
+
+    if /tocp64253/.match(@url) # Dancemania SPEED G3
+      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
+      @tracks[13] = { :artist => "ROSE", :title => "I'VE NEVER BEEN TO ME" }
+      @tracks[14] = { :artist => "JUDY CRYSTAL", :title => "YOU CAN'T HURRY LOVE" }
+    end
+
+    if /tocp64264/.match(@url) # Dancemania SPEED G4
+      @album_title = "Dancemania SPEED G4"
+      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
+      @tracks[2][:artist] = "CJ CREW feat.THE FIRELIGHTERS SHOWGROUP"
+      @tracks[7][:title] = "9 TO 5 MORNING TRAIN"
+      @tracks[8][:title] = "DIP IT LOW (Eurotrance Speedo Mix)"
+      @tracks[18][:title] = "DON'T TELL ME(Super Speedotrance)"
+      @tracks[21][:artist] = "DJ BRISK & HAM"
+      @tracks[24][:artist] = "IN EFFECT & IMPACT"
+    end
+
+    if /tocp64283/.match(@url) # Dancemania SPEED G5
+      @tracks.each {|k,v| @tracks[k] = { :title => v[:artist], :artist => v[:title] } }
+      @tracks[1][:artist] = "DJ SPEEDO feat. RAFFA"
+      @tracks[5][:title] = "TAKE A RIDE(Gammer remix)"
+      @tracks[20][:artist] = "BRISK & HAM"
+      @tracks[21][:artist] = "BRISK & HAM"
     end
 
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best

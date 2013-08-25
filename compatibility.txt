@@ -50,18 +50,18 @@
 [X] Dancemania SPEED
 [X] Dancemania SPEED 2
 [X] Dancemania SPEED 3
-[ ] Dancemania SPEED 4
-[ ] Dancemania SPEED 5
-[ ] Dancemania SPEED 6
-[ ] Dancemania SPEED 7
-[ ] Dancemania SPEED 8
-[ ] Dancemania SPEED 9
-[ ] Dancemania SPEED 10
-[ ] Dancemania SPEED G
-[ ] Dancemania SPEED G2
-[ ] Dancemania SPEED G3
-[ ] Dancemania SPEED G4
-[ ] Dancemania SPEED G5
+[X] Dancemania SPEED 4
+[X] Dancemania SPEED 5
+[X] Dancemania SPEED 6
+[X] Dancemania SPEED 7
+[X] Dancemania SPEED 8
+[X] Dancemania SPEED 9
+[X] Dancemania SPEED 10
+[X] Dancemania SPEED G
+[X] Dancemania SPEED G2
+[X] Dancemania SPEED G3
+[X] Dancemania SPEED G4
+[X] Dancemania SPEED G5
 [ ] Christmas SPEED
 [ ] classical SPEED
 [ ] classical SPEED 2
