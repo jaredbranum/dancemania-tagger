@@ -7,7 +7,10 @@ See https://github.com/jaredbranum/dancemania-tagger/blob/master/README.md
 HERE
 
 # "--help"
-puts help_text and exit(0) if ARGV.index("--help")
+if ARGV.index("--help")
+  puts help_text
+  exit(0)
+end
 # "--artist-name"
 idx = ARGV.index("--artist-name")
 2.times{ @artist_name = ARGV.delete_at(idx) } if idx
