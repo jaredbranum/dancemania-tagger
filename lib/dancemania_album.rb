@@ -23,8 +23,8 @@ class DancemaniaAlbum
     raise DancemaniaAlbum::AlbumNotFound if @url.nil? || @url.empty?
     @tracks = {}
     doc = Nokogiri::HTML(Nokogiri::HTML.parse(open(@url).read).to_html) # ridiculous
-    @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first
-      .text.gsub(/\u300e|\u300f|\u3000|\r|\n/, ' ').split(' ').join(' ')
+    @album_title = opts[:album_title] || doc.css("p:contains('\u300e')").first.
+      text.gsub(/\u300e|\u300f|\u3000|\r|\n/, ' ').split(' ').join(' ')
     @art = open(fix_href doc.css('#disc img').first.attributes['src'].value)
     @album_artist = opts[:artist_name] || "Dancemania"
     doc.css('#M-contents p.tracklist').each do |tl|
@@ -201,6 +201,60 @@ class DancemaniaAlbum
       @tracks[5][:title] = "TAKE A RIDE(Gammer remix)"
       @tracks[20][:artist] = "BRISK & HAM"
       @tracks[21][:artist] = "BRISK & HAM"
+    end
+
+    if /tocp64231/.match(@url) # Christmas SPEED
+      @tracks.each{|k,v| @tracks[k] = { :title =>
+        /([\w\s'!\uff01\-]+).*$/.match(v[:artist])[1].strip.gsub("\uff01", "!")
+      }}
+      @tracks[1][:artist]  = 'ROSE'
+      @tracks[2][:artist]  = 'SPEED ALL STARS'
+      @tracks[3][:artist]  = 'HARDCORE SYNTH ORCHESTRA'
+      @tracks[4][:artist]  = 'CJ CREW featuring BUNGA BUNGA'
+      @tracks[5][:artist]  = 'MAZERATI'
+      @tracks[6][:artist]  = 'DJ JAXX'
+      @tracks[7][:artist]  = 'ROSE & JOHN'
+      @tracks[8][:artist]  = 'DJ ELASTOPLAST'
+      @tracks[9][:artist]  = 'TERRY AND THE PHYSICIST'
+      @tracks[10][:artist] = 'NANCY AND THE BOYS'
+      @tracks[11][:artist] = 'CHI K MUNKI'
+      @tracks[12][:artist] = 'CJ CREW featuring MC BYGGLZ'
+      @tracks[13][:artist] = 'NANCY AND THE BOYS featuring TONI'
+      @tracks[14][:artist] = 'EL FEZ'
+      @tracks[15][:artist] = 'SPEEDOMASTER'
+      @tracks[16][:artist] = 'DJ SPEEDO feat. WILDSIDE'
+      @tracks[17][:artist] = 'JOHN DESIRE'
+      @tracks[18][:artist] = 'VIOLENT STRING ENSAMBLE'
+      @tracks[19][:artist] = 'MC F 40'
+      @tracks[20][:artist] = 'KK feat. MANU'
+    end
+
+    if /tocp64189/.match(@url) # classical SPEED
+      @tracks.each{|k,v| @tracks[k] = { :title =>
+        (v[:artist].include?('[') ? /\[(.*)\]/ : /(.*)(?:\s?\(.*)/).match(v[:artist])[1].strip
+      }}
+      @tracks[1][:artist]  = 'MC F 40'
+      @tracks[2][:artist]  = 'SPEEDORCHESTRA'
+      @tracks[3][:artist]  = 'KK FEAT MANU'
+      @tracks[4][:artist]  = 'ROSE'
+      @tracks[5][:artist]  = 'HARDCORE SYNTH ORCHESTRA'
+      @tracks[6][:artist]  = 'BLUE VENICE'
+      @tracks[7][:artist]  = 'CJ CREW'
+      @tracks[8][:artist]  = 'CJ CREW'
+      @tracks[9][:artist]  = 'CJ CREW featuring LILLA D'
+      @tracks[10][:artist] = 'CJ CREW'
+      @tracks[11][:artist] = 'CJ CREW'
+      @tracks[12][:artist] = 'S.N.A.H.'
+      @tracks[13][:artist] = 'VIOLENT STRING ENSAMBLE'
+      @tracks[14][:artist] = 'VENTURA'
+      @tracks[15][:artist] = 'BUS STOP'
+      @tracks[16][:artist] = 'DJ KAMBEL VS MC MAGIKA'
+      @tracks[17][:artist] = 'MR. VIB-E-RATOR'
+      @tracks[18][:artist] = 'S&K'
+      @tracks[19][:artist] = 'MAZERATI'
+      @tracks[20][:artist] = 'HARDCORE SYNTH ORCHESTRA + JONNY MITRAGLIA'
+
+      @tracks[15][:title] = 'KICK THE CAN (Hyper KCP Mix)'
     end
 
     @album_title = @album_title[0..-3] if @album_title[-2..-1] == ' -' # Captain's Best

@@ -62,8 +62,8 @@
 [X] Dancemania SPEED G3
 [X] Dancemania SPEED G4
 [X] Dancemania SPEED G5
-[ ] Christmas SPEED
-[ ] classical SPEED
+[X] Christmas SPEED
+[X] classical SPEED
 [ ] classical SPEED 2
 [ ] Dancemania SPEED SFX
 [ ] スピード刑事
