@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'taglib'
 
 class DancemaniaAlbum
-  DANCEMANIA_URL = 'http://www.emimusic.jp/dancemania/dancemania/'
+  DANCEMANIA_URL = 'http://microsites.universal-music.co.jp/dancemania/dancemania/'
   @@ALBUMS ||= (
     doc = Nokogiri::HTML(open(DANCEMANIA_URL))
     titles = doc.css('p.cdttl').map{|a| a.children.text.split(/(?:\s|\u3000)+/).join(' ') }
